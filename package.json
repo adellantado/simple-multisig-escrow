@@ -6,7 +6,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "test"
+    "test": "test",
+    "deploy-ipfs": "node scripts/deploy_ipfs.js",
+    "open": "node scripts/visit_ipfs_page.js"
   },
   "author": "",
   "license": "ISC",
