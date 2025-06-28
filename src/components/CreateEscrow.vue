@@ -121,7 +121,8 @@ export default {
         ).send({ 
           from: this.currentAccount,
           value: this.web3.utils.toWei(this.amount, 'ether'),
-          gas: 5000000
+          gasLimit: 5000000,
+          gasPrice: this.web3.utils.toWei("30", "gwei") // Higher gas price
         });
 
         console.log('Transaction sent:', tx);
