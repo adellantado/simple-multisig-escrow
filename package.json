@@ -8,7 +8,8 @@
     "preview": "vite preview",
     "test": "test",
     "deploy-ipfs": "node scripts/deploy_ipfs.js",
-    "open": "node scripts/visit_ipfs_page.js"
+    "open": "node scripts/visit_ipfs_page.js",
+    "create-escrow": "node scripts/create_polygon_escrow.js"
   },
   "author": "",
   "license": "ISC",
