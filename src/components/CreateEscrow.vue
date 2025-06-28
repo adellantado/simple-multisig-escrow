@@ -16,7 +16,7 @@
         </div>
 
         <div class="form-group">
-          <label for="amount">Amount (ETH)</label>
+          <label for="amount">Amount (POL)</label>
           <input 
             type="number" 
             v-model="amount" 

@@ -5,12 +5,12 @@
       <h2>View Escrow</h2>
         <a 
           v-if="escrowAddress"
-          :href="`https://etherscan.io/address/${escrowAddress}`"
+          :href="`https://polygonscan.io/address/${escrowAddress}`"
           target="_blank"
           rel="noopener noreferrer"
           class="etherscan-link"
         >
-          View on Etherscan ↗
+          View on Polygonscan ↗
         </a>
       </div>
       
@@ -65,7 +65,7 @@
           <div class="detail-item">
             <span class="detail-label">Value Locked</span>
             <span class="detail-value">
-              {{ formatEth(contractDetails.amount) }} ETH
+              {{ formatEth(contractDetails.amount) }} POL
               <span v-if="ethPrice" class="usd-value">(≈ ${{ formatUsd(contractDetails.amount) }})</span>
             </span>
           </div>
@@ -546,11 +546,11 @@ export default {
 
     async fetchEthPrice() {
       try {
-        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
+        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=polygon-ecosystem-token&vs_currencies=usd');
         const data = await response.json();
         this.ethPrice = data.ethereum.usd;
       } catch (error) {
-        console.error('Failed to fetch ETH price:', error);
+        console.error('Failed to fetch POL price:', error);
       }
     },
 
