@@ -23,7 +23,7 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       // Expose env variables to the client
-      'process.env.VITE_FACTORY_ADDRESS': JSON.stringify(env.VITE_FACTORY_ADDRESS)
+      'process.env.FACTORY_ADDRESS': JSON.stringify(env.FACTORY_ADDRESS)
     }
   }
 }) 
