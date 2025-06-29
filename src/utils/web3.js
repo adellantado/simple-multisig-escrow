@@ -50,6 +50,18 @@ export const getContract = async (web3, contractABI, contractAddress) => {
   }
 };
 
+export const getGasPrice = async (web3) => {
+  try {
+      const gasPrice = await web3.eth.getGasPrice();
+      const gasPriceInGwei = web3.utils.fromWei(gasPrice, "gwei");
+      console.log("Current Gas Price (Gwei):", gasPriceInGwei);
+      return gasPrice;
+  } catch (error) {
+      console.error("Error fetching gas price:", error);
+      return 0;
+  }
+}
+
 /**
  * Format ETH amount to avoid floating point precision issues
  * @param {string|number} amount - The ETH amount to format

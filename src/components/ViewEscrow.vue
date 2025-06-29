@@ -199,7 +199,7 @@
 </template>
 
 <script>
-import { getWeb3, getContract, formatEth, handleError } from "../utils/web3";
+import { getWeb3, getContract, formatEth, handleError, getGasPrice } from "../utils/web3";
 import MultisigEscrowABI from "../abi/MultisigEscrow.json" with { type: "json" };
 
 export default {
@@ -414,7 +414,10 @@ export default {
     async revokeAgreement() {
       try {
         this.loading = true;
-        await this.escrowContract.methods.revokeAgreement().send({ from: this.currentAccount });
+        await this.escrowContract.methods.revokeAgreement().send({ 
+          from: this.currentAccount,
+          gasPrice: await getGasPrice(this.web3)
+        });
         await this.loadEscrowDetails();
       } catch (error) {
         handleError(error, "Failed to revoke agreement");
@@ -426,7 +429,10 @@ export default {
     async approveAgreement() {
       try {
         this.loading = true;
-        await this.escrowContract.methods.approveAgreement().send({ from: this.currentAccount });
+        await this.escrowContract.methods.approveAgreement().send({ 
+          from: this.currentAccount,
+          gasPrice: await getGasPrice(this.web3)
+        });
         await this.loadEscrowDetails();
       } catch (error) {
         handleError(error, "Failed to approve agreement");
@@ -438,7 +444,10 @@ export default {
     async rejectAgreement() {
       try {
         this.loading = true;
-        await this.escrowContract.methods.rejectAgreement().send({ from: this.currentAccount });
+        await this.escrowContract.methods.rejectAgreement().send({ 
+          from: this.currentAccount,
+          gasPrice: await getGasPrice(this.web3)
+        });
         await this.loadEscrowDetails();
       } catch (error) {
         handleError(error, "Failed to reject agreement");
@@ -450,7 +459,10 @@ export default {
     async refundAgreement() {
       try {
         this.loading = true;
-        await this.escrowContract.methods.refundAgreement().send({ from: this.currentAccount });
+        await this.escrowContract.methods.refundAgreement().send({ 
+          from: this.currentAccount,
+          gasPrice: await getGasPrice(this.web3)
+        });
         await this.loadEscrowDetails();
       } catch (error) {
         handleError(error, "Failed to refund agreement");
@@ -462,7 +474,10 @@ export default {
     async releaseFunds() {
       try {
         this.loading = true;
-        await this.escrowContract.methods.releaseFunds().send({ from: this.currentAccount });
+        await this.escrowContract.methods.releaseFunds().send({ 
+          from: this.currentAccount,
+          gasPrice: await getGasPrice(this.web3)
+        });
         await this.loadEscrowDetails();
       } catch (error) {
         handleError(error, "Failed to release funds");
@@ -474,7 +489,10 @@ export default {
     async withdrawFunds() {
       try {
         this.loading = true;
-        await this.escrowContract.methods.withdrawFunds().send({ from: this.currentAccount });
+        await this.escrowContract.methods.withdrawFunds().send({ 
+          from: this.currentAccount,
+          gasPrice: await getGasPrice(this.web3)
+        });
         await this.loadEscrowDetails();
       } catch (error) {
         handleError(error, "Failed to withdraw funds");
@@ -486,7 +504,10 @@ export default {
     async removeFunds() {
       try {
         this.loading = true;
-        await this.escrowContract.methods.removeFunds().send({ from: this.currentAccount });
+        await this.escrowContract.methods.removeFunds().send({ 
+          from: this.currentAccount,
+          gasPrice: await getGasPrice(this.web3)
+        });
         await this.loadEscrowDetails();
       } catch (error) {
         handleError(error, "Failed to remove funds");
@@ -498,7 +519,10 @@ export default {
     async lockFunds() {
       try {
         this.loading = true;
-        await this.escrowContract.methods.lockFunds().send({ from: this.currentAccount });
+        await this.escrowContract.methods.lockFunds().send({ 
+          from: this.currentAccount,
+          gasPrice: await getGasPrice(this.web3)
+        });
         await this.loadEscrowDetails();
       } catch (error) {
         handleError(error, "Failed to lock funds");
@@ -510,7 +534,10 @@ export default {
     async setMultisig(multisigAddress) {
       try {
         this.loading = true;
-        await this.escrowContract.methods.setMultisig(multisigAddress).send({ from: this.currentAccount });
+        await this.escrowContract.methods.setMultisig(multisigAddress).send({ 
+          from: this.currentAccount,
+          gasPrice: await getGasPrice(this.web3)
+        });
         await this.loadEscrowDetails();
       } catch (error) {
         handleError(error, "Failed to set multisig");
@@ -522,7 +549,10 @@ export default {
     async approveMultisig() {
       try {
         this.loading = true;
-        await this.escrowContract.methods.approveMultisig().send({ from: this.currentAccount });
+        await this.escrowContract.methods.approveMultisig().send({ 
+          from: this.currentAccount,
+          gasPrice: await getGasPrice(this.web3)
+        });
         await this.loadEscrowDetails();
       } catch (error) {
         handleError(error, "Failed to approve multisig");
@@ -548,7 +578,7 @@ export default {
       try {
         const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=polygon-ecosystem-token&vs_currencies=usd');
         const data = await response.json();
-        this.ethPrice = data.ethereum.usd;
+        this.ethPrice = data['polygon-ecosystem-token'].usd;
       } catch (error) {
         console.error('Failed to fetch POL price:', error);
       }

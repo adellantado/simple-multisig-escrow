@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { getWeb3, getContract, handleError } from "../utils/web3";
+import { getWeb3, getContract, handleError, getGasPrice } from "../utils/web3";
 import MultisigEscrowFactoryABI from "../abi/MultisigEscrowFactory.json" with { type: "json" };
 
 export default {
@@ -81,7 +81,7 @@ export default {
     async initializeContracts() {
       try {
         this.web3 = await getWeb3();
-        const factoryAddress = import.meta.env.VITE_FACTORY_ADDRESS;
+        const factoryAddress = process.env.FACTORY_ADDRESS;
         this.factoryContract = await getContract(
           this.web3,
           MultisigEscrowFactoryABI,
@@ -122,7 +122,7 @@ export default {
           from: this.currentAccount,
           value: this.web3.utils.toWei(this.amount, 'ether'),
           gasLimit: 5000000,
-          gasPrice: this.web3.utils.toWei("30", "gwei") // Higher gas price
+          gasPrice: await getGasPrice(this.web3)
         });
 
         console.log('Transaction sent:', tx);
