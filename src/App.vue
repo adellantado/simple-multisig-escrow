@@ -6,7 +6,7 @@
     <header class="header">
       <div class="header-content">
         <div class="title-section">
-          <h1>🔗 Multisig Escrow</h1>
+          <h1>Multisig Escrow</h1>
           <p class="subtitle">Secure and transparent multisig escrow service</p>
         </div>
         <div class="connection-status">
@@ -50,12 +50,34 @@
     </header>
 
     <main class="main-content">
-      <router-view 
-        v-if="isConnected"
-        :current-account="currentAccount"
-        @create-escrow="handleCreateEscrow"
-        @escrow-created="handleEscrowCreated"
-      />
+      <!-- When wallet is NOT connected: Show welcome -->
+      <div v-if="!isConnected" class="welcome-section">
+        <h2>Welcome to Multisig Escrow</h2>
+        <p>Connect your wallet to get started</p>
+        <button @click="connectWallet" class="btn btn-primary">Connect Wallet</button>
+      </div>
+
+      <!-- When wallet IS connected: Show components based on hash routes -->
+      <template v-else>
+        <!-- #view/{escrow_address} - Show ViewEscrow -->
+        <ViewEscrow 
+          v-if="currentRoute === 'view' && escrowAddress"
+          :address="escrowAddress"
+          :current-account="currentAccount"
+        />
+        <!-- #create - Show CreateEscrow -->
+        <CreateEscrow 
+          v-else-if="currentRoute === 'create'"
+          :current-account="currentAccount"
+          @escrow-created="handleEscrowCreated"
+        />
+        <!-- Default root page when connected: Show InitView -->
+        <InitView 
+          v-else
+          :current-account="currentAccount"
+          @create-escrow="handleCreateEscrow"
+        />
+      </template>
     </main>
   </div>
 </template>
@@ -80,7 +102,9 @@ export default {
       isConnected: false,
       currentAccount: null,
       loading: false,
-      isMenuOpen: false
+      isMenuOpen: false,
+      currentRoute: 'init',
+      escrowAddress: null
     };
   },
   methods: {
@@ -114,7 +138,8 @@ export default {
         this.loading = true;
         this.isConnected = false;
         this.currentAccount = null;
-        this.$router.push('/');
+        this.currentRoute = 'init';
+        this.escrowAddress = null;
       } catch (error) {
         handleError(error, "Failed to disconnect wallet");
       } finally {
@@ -127,15 +152,43 @@ export default {
     },
 
     handleCreateEscrow() {
-      this.$router.push('/create');
+      this.navigateTo('create');
     },
 
     handleEscrowCreated(escrowAddress) {
-      this.$router.push(`/view/${escrowAddress}`);
+      this.navigateTo('view', { address: escrowAddress });
+    },
+
+    parseHash() {
+      const hash = window.location.hash.slice(1) || '';
+      const parts = hash.split('/');
+
+      if (parts[0] === 'create') {
+        this.currentRoute = 'create';
+        this.escrowAddress = null;
+      } else if (parts[0] === 'view' && parts[1]) {
+        this.currentRoute = 'view';
+        this.escrowAddress = parts[1];
+      } else {
+        this.currentRoute = 'init';
+        this.escrowAddress = null;
+      }
+    },
+
+    navigateTo(route, params = {}) {
+      if (route === 'create') {
+        window.location.hash = '#create';
+      } else if (route === 'view' && params.address) {
+        window.location.hash = `#view/${params.address}`;
+      } else {
+        window.location.hash = '#';
+      }
     }
   },
 
   async created() {
+    this.parseHash();
+    window.addEventListener('hashchange', this.parseHash);
     // Check if wallet is already connected
     if (window.ethereum) {
       const accounts = await window.ethereum.request({ method: 'eth_accounts' });
@@ -145,6 +198,10 @@ export default {
         await this.initializeWeb3();
       }
     }
+  },
+
+  beforeUnmount() {
+    window.removeEventListener('hashchange', this.parseHash);
   }
 };
 </script>

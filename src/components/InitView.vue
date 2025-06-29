@@ -5,18 +5,12 @@
       <p class="subtitle">Choose an action to get started</p>
       
       <div class="actions-grid">
-        <router-link 
-          to="/create" 
-          class="btn btn-primary"
-        >
+        <a href="#create" class="btn btn-primary">
           Create Escrow
-        </router-link>
-        <router-link 
-          to="/view/new" 
-          class="btn btn-secondary"
-        >
+        </a>
+        <a href="#view/new" class="btn btn-secondary">
           View Escrow
-        </router-link>
+        </a>
       </div>
     </div>
   </div>
