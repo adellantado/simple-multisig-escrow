@@ -1,11 +1,12 @@
 <template>
   <div class="create-escrow">
     <div class="card">
-      <h2>Deploy New Multisig Escrow</h2>
+      <h2>Deploy New Escrow Contract</h2>
       <form @submit.prevent="deployContract" class="form">
         <div class="form-group">
           <label for="beneficiary">Beneficiary Address</label>
           <input 
+            id="beneficiary"
             type="text" 
             v-model="beneficiary" 
             placeholder="0x..." 
@@ -18,12 +19,13 @@
         <div class="form-group">
           <label for="amount">Amount (POL)</label>
           <input 
+            id="amount"
             type="number" 
             v-model="amount" 
             placeholder="0.1" 
             required 
             class="input"
-            step="0.000000000000000001"
+            step="0.1"
             min="0"
             :disabled="loading"
           />
@@ -32,6 +34,7 @@
         <div class="form-group">
           <label for="deadline">Deadline</label>
           <input 
+            id="deadline"
             type="datetime-local" 
             v-model="deadlineDate" 
             :min="getCurrentDateTime()"
@@ -210,6 +213,7 @@ export default {
   border: 1px solid #ddd;
   border-radius: 8px;
   margin-bottom: 1rem;
+  box-sizing: border-box;
 }
 
 .btn {

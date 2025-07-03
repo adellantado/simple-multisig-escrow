@@ -5,7 +5,7 @@
       <h2>View Escrow</h2>
         <a 
           v-if="escrowAddress"
-          :href="`https://polygonscan.io/address/${escrowAddress}`"
+          :href="`https://polygonscan.com/address/${escrowAddress}`"
           target="_blank"
           rel="noopener noreferrer"
           class="etherscan-link"
@@ -623,6 +623,7 @@ export default {
 
 .input {
   width: 100%;
+  box-sizing: border-box;
   padding: 0.75rem;
   border: 1px solid #ddd;
   border-radius: 8px;
