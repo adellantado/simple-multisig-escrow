@@ -175,14 +175,22 @@
             >
               Lock Funds
             </button>
-            <button 
-              v-if="canSetMultisig"
-              @click="setMultisig"
-              class="btn btn-action"
-              :disabled="loading"
-            >
-              Set Multisig
-            </button>
+            <div v-if="canSetMultisig" class="multisig-input-group">
+              <button 
+                @click="setMultisig(multisigAddress)"
+                class="btn btn-action"
+                :disabled="loading || !multisigAddress"
+              >
+                {{ contractDetails.multisig ? 'Change Multisig' : 'Set Multisig' }}
+              </button>
+              <input 
+                v-model="multisigAddress"
+                type="text" 
+                :placeholder="contractDetails.multisig || '0x...'" 
+                class="input multisig-input"
+                :disabled="loading"
+              />
+            </div>
             <button 
               v-if="canApproveMultisig"
               @click="approveMultisig"
@@ -191,6 +199,17 @@
             >
               Approve Multisig
             </button>
+            <div v-if="canApproveMultisig">
+              <span class="multisig-label">Multisig Address:</span>
+              <span 
+                class="multisig-address copyable" 
+                @click="copyToClipboard(contractDetails.multisig)"
+                :title="copyStatus"
+              >
+                {{ formatAddress(contractDetails.multisig) }}
+                <span class="copy-icon">📋</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -224,7 +243,8 @@ export default {
       timeRemaining: 0,
       timer: null,
       copyStatus: 'Click to copy',
-      ethPrice: null
+      ethPrice: null,
+      multisigAddress: ''
     };
   },
   computed: {
@@ -790,5 +810,42 @@ export default {
   color: #666;
   font-size: 0.9em;
   margin-left: 0.5rem;
+}
+
+.multisig-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.multisig-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 0;
+}
+
+.multisig-info {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.multisig-label {
+  font-weight: 500;
+  margin-right: 0.5rem;
+}
+
+.multisig-address {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.multisig-address:hover {
+  opacity: 0.8;
 }
 </style> 
