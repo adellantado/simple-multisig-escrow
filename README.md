@@ -1,4 +1,4 @@
-# Self-deployable Multisig Escrow
+# Self-deployable Multisig Escrow 🏦
 Simple escrow dapp with multisig disputes resolution
 
 > [!Important]
@@ -10,7 +10,7 @@ Simple escrow dapp with multisig disputes resolution
 > Also possible instead of multisig use an address of an aggreed **Artibrator**. 
 
 
-## Live on Polygon chain
+## Live on Polygon chain 🔗
 
 Contract address:
 https://polygonscan.com/address/0xDF078a36C7ED2361Aa83846B6F9A3F76c98EE689
@@ -27,7 +27,7 @@ QmRUWNaP3kwV4iQnsRjp8cWYA4pg8ANZ3buMuAso3U8u1o
 >
 > Make sure .env file contains correct IPFS_PAGE variable.
 
-## Business logic of the Escrow Contract
+## Business logic of the Escrow Contract 🤝
 
 > [!Note]
 > The contract supports unlimited number of escrows.
@@ -89,7 +89,7 @@ If no agreement is reached by the deadline:
 - **Time-based restrictions**: Enforces deadlines and waiting periods
 
 
-## Deploy your own web app and/or contract
+## Deploy your own web app and/or contract 🧪
 - Run npm install
 - Deploy the factory contract to EVM compatible chain with Hardhat ignition (or use existing polygon contract)
 - Create .env file with the factory address
