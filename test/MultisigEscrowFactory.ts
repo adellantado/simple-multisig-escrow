@@ -45,6 +45,12 @@ import {
                 [depositor, escrowAddress],
                 [-value, value]
             );
+
+            const depositorContracts = await escrowFactory.getDepositorContracts(depositor);
+            expect(depositorContracts).to.include(escrowAddress);
+
+            const escrowCount = await escrowFactory.getDepositorContractCount(depositor);
+            expect(escrowCount).to.equal(1);
         });
 
     });
