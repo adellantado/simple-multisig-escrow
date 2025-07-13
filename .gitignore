@@ -18,3 +18,6 @@ dist
 ignition/deployments/*
 
 todo
+
+# python venv for security setup
+venv
