@@ -10,7 +10,8 @@
     "deploy-ipfs": "node scripts/deploy_ipfs.js",
     "open": "node scripts/visit_ipfs_page.js",
     "create-escrow": "node scripts/create_polygon_escrow.js",
-    "mythril": "bash scripts/dev/run_mythril.sh"
+    "mythril": "bash scripts/dev/run_mythril.sh",
+    "slither": "bash scripts/dev/run_slither.sh"
   },
   "author": "",
   "license": "ISC",

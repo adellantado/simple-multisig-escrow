@@ -21,3 +21,4 @@ todo
 
 # python venv for security setup
 venv
+venv-*
