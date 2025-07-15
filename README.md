@@ -1,5 +1,20 @@
 # Self-deployable Multisig Escrow 🏦
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Live Demo](https://img.shields.io/badge/demo-online-brightgreen)](https://adellantado.github.io/simple-multisig-escrow/)
+[![Polygon Contract](https://img.shields.io/badge/Deployed%20on-Polygon-8247e5?logo=polygon&logoColor=white)](https://polygonscan.com/address/0xDF078a36C7ED2361Aa83846B6F9A3F76c98EE689)
+[![IPFS](https://img.shields.io/badge/Deployed%20on-IPFS-65c2cb?logo=ipfs&logoColor=white)](https://ipfs.io/ipfs/QmRUWNaP3kwV4iQnsRjp8cWYA4pg8ANZ3buMuAso3U8u1o)
+
+![Vue.js](https://img.shields.io/badge/Built%20with-Vue.js-42b883?logo=vue.js&logoColor=white)
+[![Built with Hardhat](https://img.shields.io/badge/Built%20with-Hardhat-blue?logo=ethereum)](https://hardhat.org/)
+![Solidity](https://img.shields.io/badge/Solidity-^0.8.26-blue.svg?logo=ethereum)
+[![Mythril](https://img.shields.io/badge/security-mythril-blueviolet?logo=ethereum&logoColor=white)](https://github.com/ConsenSys/mythril)
+[![Slither](https://img.shields.io/badge/Security-Slither-2f2f2f?logo=ethereum&logoColor=white)](https://github.com/crytic/slither)
+
+
+
 Simple escrow dapp with multisig disputes resolution
+
 
 > [!Important]
 > Also possible to use the live deployment on Polygon chain and the web app deployed to github pages and IPFS.
